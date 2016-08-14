@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: __dirname + "/app/main.js",
@@ -20,7 +21,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: 'style!css?modules!postcss'
+        loader: ExtractTextPlugin.extract('style', 'css?modules!postcss')
       }
     ]
   },
@@ -31,5 +32,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: __dirname + "/app/index.tmpl.html"
     }),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.UglifyJsPlugin(),
+    new ExtractTextPlugin("style.css")
   ],
 }
