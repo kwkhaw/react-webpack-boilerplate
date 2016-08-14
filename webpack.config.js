@@ -1,10 +1,11 @@
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   devtool: 'eval-source-map',
   entry:  __dirname + "/app/main.js",
   output: {
-    path: __dirname + "/public",
+    path: __dirname + "/build",
     filename: "bundle.js"
   },
   module: {
@@ -28,10 +29,12 @@ module.exports = {
     require('autoprefixer')
   ],
   plugins: [
-    new webpack.BannerPlugin("Copyright kwkhaw")
+    new webpack.BannerPlugin("Copyright kwkhaw"),
+    new HtmlWebpackPlugin({
+      template: __dirname + "/app/index.tmpl.html"
+    })
   ],
   devServer: {
-    contentBase: "./public",
     port: 3000,
     colors: true,
     historyApiFallback: true,
