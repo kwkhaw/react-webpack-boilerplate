@@ -32,12 +32,14 @@ module.exports = {
     new webpack.BannerPlugin("Copyright kwkhaw"),
     new HtmlWebpackPlugin({
       template: __dirname + "/app/index.tmpl.html"
-    })
+    }),
+    new webpack.HotModuleReplacementPlugin()
   ],
   devServer: {
     port: 3000,
     colors: true,
     historyApiFallback: true,
-    inline: true
+    inline: true,
+    hot: true
   } 
 }
